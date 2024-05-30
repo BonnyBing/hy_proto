@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service SalesService {
+  rpc GetSales (google.protobuf.Empty) returns (SalesResponse);      // 获取营业记录列表
+  rpc AddSale (Sale) returns (google.protobuf.Empty);                // 添加营业记录
+  rpc UpdateSale (Sale) returns (google.protobuf.Empty);             // 更新营业记录
+  rpc DeleteSale (SaleID) returns (google.protobuf.Empty);           // 删除营业记录
+}
+
+message Sale {
+  string productName = 1;    // 菜品名称
+  int32 quantity = 2;        // 数量
+  float totalPrice = 3;      // 总价
+  string type = 4;
+  google.protobuf.Timestamp date = 5;  // 使用 Timestamp 类型表示日期时间
+}
+
+message SaleID {
+  string id = 1;             // 营业记录 ID
+}
+
+message SalesResponse {
+  repeated Sale sales = 1;            // 营业记录列表
+}

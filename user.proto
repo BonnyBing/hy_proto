@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+
+service UserService {
+  rpc GetUsers (google.protobuf.Empty) returns (UserResponse);       // 获取用户列表
+  rpc AddUser (User) returns (google.protobuf.Empty);                // 添加用户
+  rpc UpdateUser (User) returns (google.protobuf.Empty);             // 更新用户
+  rpc DeleteUser (UserID) returns (google.protobuf.Empty);           // 删除用户
+}
+
+message User {
+  string name = 1;     // 用户名
+  int32 quanxian = 2;       // 用户年龄
+  string pwd = 3;
+}
+
+message UserID {
+  string id = 1;       // 用户 ID
+}
+
+message UserResponse {
+  repeated User users = 1;            // 用户列表
+}

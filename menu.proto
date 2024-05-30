@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+
+service MenuService {
+  rpc GetMenu (google.protobuf.Empty) returns (MenuResponse);       // 获取菜单列表
+  rpc AddMenuItem (MenuItem) returns (google.protobuf.Empty);       // 添加菜单项
+  rpc UpdateMenuItem (MenuItem) returns (google.protobuf.Empty);    // 更新菜单项
+  rpc DeleteMenuItem (MenuItemID) returns (google.protobuf.Empty);  // 删除菜单项
+}
+
+message MenuItem {
+  string name = 1;     // 菜单项名称
+  float price = 2;    // 菜单项价格
+  string type = 3;    
+}
+
+message MenuItemID {
+  string id = 1;       // 菜单项 ID
+}
+
+message MenuResponse {
+  repeated MenuItem menuItems = 1;    // 菜单项列表
+}
